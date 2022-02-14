@@ -4,12 +4,16 @@ export default class Player{
     this.gameHeight = gameHeight;
     this.width = 90;
     this.height = 180;
-    this.speedX = 7;
-    this.speedY = 40;
+    this.speedX = 0;
+    this.speedY = 0;
+    this.isMovingLeft = false;
+    this.isMovingRight = false;
+    this.maxSpeedX = 7;
+    this.maxSpeedY = 9;
     this.velX = 0;
     this.velY = 0;
     this.hasJumped = false;
-    this.accDown=5;
+    this.accDown=.2;
 
     this.playerImage = new Image();
     this.playerImage.src = "/images/PlayerDrawUp.jpg";
@@ -19,21 +23,29 @@ export default class Player{
     }
 
   }
-
+  updateVelocityX (){
+    if (moveRight = true){
+      velX++;
+    }
+    if (moveLeft = true){
+      velX--;
+    }
+  }
   moveLeft(){
-    this.velX = -1*this.speedX;
+    this.isMovingLeft=true;
   }
   moveRight(){
-    this.velX = this.speedX;
+    this.isMovingRight=true;
   }
   stopHorizontal(){
-    this.velX = 0;
+    this.isMovingLeft = false;
+    this.isMovingRight = true;
   }
   jump(){
     if(this.hasJumped)
       return;
     this.hasJumped=true;
-    this.velY = this.speedY;
+    this.velY = this.maxSpeedY;
   }
   dash(){
     if(this.velX<0)
@@ -57,7 +69,7 @@ export default class Player{
 
   update(deltaTime){
     if(!deltaTime)return;
-
+    updateVelocityX();
     this.position.x+=this.velX;
     this.position.y-=this.velY;
     this.velY-=this.accDown;

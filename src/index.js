@@ -20,6 +20,7 @@ new InputHandler(player);
 let lastTime = 0;
 
 function gameLoop(timestamp){
+  updateVelocityX();
   let deltaTime = timestamp - lastTime;
   lastTime = timestamp;
 
